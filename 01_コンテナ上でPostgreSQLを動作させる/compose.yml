@@ -1,22 +1,20 @@
 services:
   postgres:
-    image: postgres:latest
-    container_name: postgres_container
+    image: postgres:17
+    container_name: postgres_db
     environment:
-      POSTGRES_USER: yourusername
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_DB: yourdatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
     volumes:
-volumes:
-  - postgres_data:
-    - /var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres_network
 
 volumes:
   postgres_data:
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres_network
 
 networks:
   postgres_network:
